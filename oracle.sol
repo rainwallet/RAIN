@@ -2,21 +2,17 @@
 contract RainCloud{
     
     uint8 number;
+    uint8 fee 18;
     
-    event Deposit(address from, uint value);
-    event SetNumber();
+    event PayUBI(address to, uint value);
+    event ReceiveFee(address from, uint value);
 
     function() {
         if (msg.value > 0)
-            Deposit(msg.sender, msg.value);
-    }
+            ReceiveFee(address msg.sender, msg.value);
+    } 
     
-    function setNumber(uint8 givenNumber) {
-        number = givenNumber;
-        SetNumber();
-    }
-    
-    function guessNumber(uint8 givenNumber) constant returns (bool) {
-        return (givenNumber == number);
+    function collectUBI(address requestor) {
+        //if last UBI was >= 12mo ago then fund the address
     }
 }
